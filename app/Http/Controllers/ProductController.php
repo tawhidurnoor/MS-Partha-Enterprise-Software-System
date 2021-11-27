@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('Products.index',[
+        return view('Products.index', [
             'products' => $products,
         ]);
     }
@@ -44,14 +44,14 @@ class ProductController extends Controller
         if ($product->save()) {
 
             $notification = array(
-                'message' => 'Added Successfully.',
+                'message' => 'Product Added Successfully.',
                 'alert-type' => 'alert-success'
             );
             return redirect()->back()->with($notification);
         } else {
 
             $notification = array(
-                'message' => 'Error Adding',
+                'message' => 'Error Adding Product',
                 'alert-type' => 'alert-danger'
             );
             return redirect()->back()->with($notification);
@@ -66,7 +66,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return $product;
     }
 
     /**
@@ -89,7 +89,23 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->product_name = $request->product_name;
+
+        if ($product->save()) {
+
+            $notification = array(
+                'message' => 'Product Updated Successfully.',
+                'alert-type' => 'alert-success'
+            );
+            return redirect()->back()->with($notification);
+        } else {
+
+            $notification = array(
+                'message' => 'Error Updating Product',
+                'alert-type' => 'alert-danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**
