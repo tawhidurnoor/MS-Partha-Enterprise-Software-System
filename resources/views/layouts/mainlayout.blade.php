@@ -10,7 +10,7 @@
 
 
     @yield('title')
-    
+
 
 
     <!-- Meta -->
@@ -18,12 +18,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="#">
-    <meta name="keywords"
-        content="flat ui, admin Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta name="keywords" content="flat ui, admin Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="#">
     <!-- Favicon icon -->
-    <link rel="icon" href="https://demo.dashboardpack.com/adminty-html/files/assets/images/favicon.ico"
-        type="image/x-icon">
+    <link rel="icon" href="https://demo.dashboardpack.com/adminty-html/files/assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
     <!-- Required Fremwork -->
@@ -114,13 +112,11 @@
                             <li class="user-profile header-notification">
                                 <div class="dropdown-primary dropdown">
                                     <div class="dropdown-toggle" data-toggle="dropdown">
-                                        <img src="https://scontent.fdac23-1.fna.fbcdn.net/v/t1.6435-1/c140.431.801.801a/s160x160/73504712_1329469617221549_6402717243766996992_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=7206a8&_nc_eui2=AeFZiZpt3nj5bPSiTLdrHo8HrBTQn1JX4jesFNCfUlfiN-xDPfG39kzV4Y_WiG2AgYewUPAhRIwaQ1qESDNwv-Ga&_nc_ohc=SkUYZy9WsgwAX902fsm&_nc_oc=AQn4Q3Vjj1jbe8o_Ijb26X1gQl4S-3IYsUBLNdB5EU_4oD8AczaFtGzhre69GDfNy1c&_nc_ht=scontent.fdac23-1.fna&oh=11ab5750f1e092a96d08cd06614fc713&oe=61BC5ACA" class="img-radius"
-                                            alt="User-Profile-Image">
+                                        <img src="https://scontent.fdac23-1.fna.fbcdn.net/v/t1.6435-1/c140.431.801.801a/s160x160/73504712_1329469617221549_6402717243766996992_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=7206a8&_nc_eui2=AeFZiZpt3nj5bPSiTLdrHo8HrBTQn1JX4jesFNCfUlfiN-xDPfG39kzV4Y_WiG2AgYewUPAhRIwaQ1qESDNwv-Ga&_nc_ohc=SkUYZy9WsgwAX902fsm&_nc_oc=AQn4Q3Vjj1jbe8o_Ijb26X1gQl4S-3IYsUBLNdB5EU_4oD8AczaFtGzhre69GDfNy1c&_nc_ht=scontent.fdac23-1.fna&oh=11ab5750f1e092a96d08cd06614fc713&oe=61BC5ACA" class="img-radius" alt="User-Profile-Image">
                                         <span>Partha Ghose</span>
                                         <i class="feather icon-chevron-down"></i>
                                     </div>
-                                    <ul class="show-notification profile-notification dropdown-menu"
-                                        data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                    <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                                         <li>
                                             <a href="#!">
                                                 <i class="feather icon-settings"></i> Settings
@@ -155,12 +151,12 @@
                 </div>
             </nav>
 
-            
+
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
                         <div class="pcoded-inner-navbar main-menu">
-                            <div class="pcoded-navigatio-lavel">Navigation</div>    
+                            <div class="pcoded-navigatio-lavel">Navigation</div>
                             <ul class="pcoded-item pcoded-left-item">
 
                                 <li class="">
@@ -178,7 +174,7 @@
                                 </li>
 
                                 <li class="">
-                                    <a href="{{route('dashboard')}}">
+                                    <a href="{{route('stocks.index')}}">
                                         <span class="pcoded-micon"><i class="feather icon-box"></i></span>
                                         <span class="pcoded-mtext">Stock Register</span>
                                     </a>
@@ -208,7 +204,7 @@
         </div>
     </div>
 
-     <!-- Required Jquery -->
+    <!-- Required Jquery -->
     <script type="text/javascript" src="files/bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="files/bower_components/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="files/bower_components/popper.js/dist/umd/popper.min.js"></script>
@@ -232,10 +228,8 @@
     <script src="files/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
     <!-- i18next.min.js -->
     <script type="text/javascript" src="files/bower_components/i18next/i18next.min.js"></script>
-    <script type="text/javascript"
-        src="files/bower_components/i18next-xhr-backend/i18nextXHRBackend.min.js"></script>
-    <script type="text/javascript"
-        src="files/bower_components/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.min.js"></script>
+    <script type="text/javascript" src="files/bower_components/i18next-xhr-backend/i18nextXHRBackend.min.js"></script>
+    <script type="text/javascript" src="files/bower_components/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.min.js"></script>
     <script type="text/javascript" src="files/bower_components/jquery-i18next/jquery-i18next.min.js"></script>
     <!-- Custom js -->
     <script src="files/assets/pages/data-table/js/data-table-custom.js"></script>

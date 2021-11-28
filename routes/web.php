@@ -20,3 +20,5 @@ Route::get('/', function () {
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Route::resource('/products', 'ProductController');
+
+Route::resource('/stocks', 'StockController');
