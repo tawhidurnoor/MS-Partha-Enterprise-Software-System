@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="card-block">
                                     <div class="dt-responsive table-responsive">
-                                        <table id="simpletable" class="table table-striped table-bordered nowrap">
+                                        <table id="datatable" class="table table-striped table-bordered nowrap">
                                             <thead>
                                                 <tr>
                                                     <th>Date</th>
@@ -82,20 +82,37 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($products as $product)
+
+                                                @foreach ($stocks as $stock)
                                                 <tr>
                                                     <td>
-                                                        {{ $product->product_name }}
+                                                        {!! htmlspecialchars_decode(date('j-m-Y', strtotime($stock->date))) !!}
                                                     </td>
                                                     <td>
-                                                        <button type="button" class="btn btn-primary waves-effect edit_button" data-id="{{ $product->id }}">Edit</button>
+                                                        {{ $stock->product_name }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $stock->receipts }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $stock->sell }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $stock->balance }}
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary waves-effect edit_button" data-id="{{ $stock->id }}">Edit</button>
                                                     </td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Product Name</th>
+                                                    <th>Date</th>
+                                                    <th>Product</th>
+                                                    <th>Receipts</th>
+                                                    <th>Sell</th>
+                                                    <th>Balance</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </tfoot>
@@ -123,19 +140,35 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add a Product</h4>
+                <h4 class="modal-title">Register a Stock</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('products.store') }}" method="post">
+            <form action="{{ route('stocks.store') }}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Product Name</label>
-                        <input type="text" name="product_name" class="form-control" required>
+                        <label>Date</label>
+                        <input type="date" name="date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Product</label>
+                        <select name="product_id" class="form-control" required>
+                            <option value="">Select a product </option>
+                            @foreach($products as $product)
+                            <option value="{{$product->id}}">
+                                {{$product->product_name}}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Receipts</label>
+                        <input type="number" name="receipts" class="form-control" required>
                     </div>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary waves-effect waves-light ">Add</button>
@@ -151,7 +184,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit Product</h4>
+                <h4 class="modal-title">Edit Stock Register</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -161,8 +194,23 @@
                 {{ method_field('PUT') }}
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Product Name</label>
-                        <input type="text" name="product_name" id="product_name" class="form-control" required>
+                        <label>Date</label>
+                        <input type="date" name="date" id="date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Product</label>
+                        <select name="product_id" id="product_id" class="form-control" required>
+                            <option value="">Select a product </option>
+                            @foreach($products as $product)
+                            <option value="{{$product->id}}">
+                                {{$product->product_name}}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Receipts</label>
+                        <input type="number" name="receipts" id="receipts" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -204,15 +252,26 @@
     function getEditDetails(id) {
         $.ajax({
             type: 'GET',
-            url: 'products/' + id,
+            url: 'stocks/' + id,
             dataType: 'json',
             success: function(response) {
-                $('#product_name').val(response.product_name);
+                $('#date').val(response.date);
+                $('#product_id').val(response.product_id);
+                $('#receipts').val(response.receipts);
             }
         });
 
-        document.getElementById("edit_form").action = "products/" + id;
+        document.getElementById("edit_form").action = "stocks/" + id;
     }
 </script>
 
+<script>
+    $('#datatable').DataTable({
+        "paging": true,
+        "ordering": false,
+        "bLengthChange": true,
+        "info": true,
+        "searching": true
+    });
+</script>
 @endsection

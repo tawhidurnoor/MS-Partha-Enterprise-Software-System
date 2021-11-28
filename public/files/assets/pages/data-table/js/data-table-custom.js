@@ -1,8 +1,8 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     // Plugin data table
-    $.fn.dataTable.Api.register('column().data().sum()', function() {
-        return this.reduce(function(a, b) {
+    $.fn.dataTable.Api.register('column().data().sum()', function () {
+        return this.reduce(function (a, b) {
             var x = parseFloat(a) || 0;
             var y = parseFloat(b) || 0;
             return x + y;
@@ -15,26 +15,26 @@ $(document).ready(function() {
 
     $('<button class="btn btn-primary  m-b-20">sum of age in all rows</button>')
         .prependTo('.dt-plugin-buttons')
-        .on('click', function() {
+        .on('click', function () {
             alert('Column sum is: ' + table.column(3).data().sum());
         });
 
     $('<button class="btn btn-primary m-r-10 m-b-20">sum of  age of visible rows</button>')
         .prependTo('.dt-plugin-buttons')
-        .on('click', function() {
+        .on('click', function () {
             alert('Column sum is: ' + table.column(3, { page: 'current' }).data().sum());
         });
 
 
     $.fn.dataTable.ext.type.detect.unshift(
-        function(d) {
+        function (d) {
             return d === 'Low' || d === 'Medium' || d === 'High' ?
                 'salary-grade' :
                 null;
         }
     );
 
-    $.fn.dataTable.ext.type.order['salary-grade-pre'] = function(d) {
+    $.fn.dataTable.ext.type.order['salary-grade-pre'] = function (d) {
         switch (d) {
             case 'Low':
                 return 1;
@@ -49,7 +49,7 @@ $(document).ready(function() {
 
     /* Custom filtering function which will search data in column four between two values */
     $.fn.dataTable.ext.search.push(
-        function(settings, data, dataIndex) {
+        function (settings, data, dataIndex) {
             var min = parseInt($('#min').val(), 10);
             var max = parseInt($('#max').val(), 10);
             var age = parseFloat(data[3]) || 0; // use data for the age column
@@ -67,40 +67,40 @@ $(document).ready(function() {
     var dtage = $('#dt-range').DataTable();
 
     // Event listener to the two range filtering inputs to redraw on input
-    $('#min, #max').keyup(function() {
+    $('#min, #max').keyup(function () {
         dtage.draw();
     });
 
     /* Create an array with the values of all the input boxes in a column */
-    $.fn.dataTable.ext.order['dom-text'] = function(settings, col) {
-        return this.api().column(col, { order: 'index' }).nodes().map(function(td, i) {
+    $.fn.dataTable.ext.order['dom-text'] = function (settings, col) {
+        return this.api().column(col, { order: 'index' }).nodes().map(function (td, i) {
             return $('input', td).val();
         });
     }
 
     /* Create an array with the values of all the input boxes in a column, parsed as numbers */
-    $.fn.dataTable.ext.order['dom-text-numeric'] = function(settings, col) {
-        return this.api().column(col, { order: 'index' }).nodes().map(function(td, i) {
+    $.fn.dataTable.ext.order['dom-text-numeric'] = function (settings, col) {
+        return this.api().column(col, { order: 'index' }).nodes().map(function (td, i) {
             return $('input', td).val() * 1;
         });
     }
 
     /* Create an array with the values of all the select options in a column */
-    $.fn.dataTable.ext.order['dom-select'] = function(settings, col) {
-        return this.api().column(col, { order: 'index' }).nodes().map(function(td, i) {
+    $.fn.dataTable.ext.order['dom-select'] = function (settings, col) {
+        return this.api().column(col, { order: 'index' }).nodes().map(function (td, i) {
             return $('select', td).val();
         });
     }
 
     /* Create an array with the values of all the checkboxes in a column */
-    $.fn.dataTable.ext.order['dom-checkbox'] = function(settings, col) {
-        return this.api().column(col, { order: 'index' }).nodes().map(function(td, i) {
+    $.fn.dataTable.ext.order['dom-checkbox'] = function (settings, col) {
+        return this.api().column(col, { order: 'index' }).nodes().map(function (td, i) {
             return $('input', td).prop('checked') ? '1' : '0';
         });
     }
 
     /* Initialise the table with the required column ordering data types */
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#dt-live-dom').DataTable({
             "columns": [
                 null,
@@ -134,7 +134,7 @@ $(document).ready(function() {
         "serverSide": true,
         "ajax": {
             url: "dt-json-data/scripts/server-processing.php",
-            data: function(d) {
+            data: function (d) {
                 d.myKey = "myValue";
                 // d.custom = $('#myInput').val();
                 // etc
@@ -218,7 +218,7 @@ $(document).ready(function() {
         }]
     });
 
-    $('#dt-generate-content tbody').on('click', 'button', function() {
+    $('#dt-generate-content tbody').on('click', 'button', function () {
         var data = generatetable.row($(this).parents('tr')).data();
         alert(data[0] + "'s salary is: " + data[5]);
     });
@@ -298,7 +298,7 @@ $(document).ready(function() {
     var t = $('#add-row-table').DataTable();
     var counter = 1;
 
-    $('#addRow').on('click', function() {
+    $('#addRow').on('click', function () {
         t.row.add([
             counter + '.1',
             counter + '.2',
@@ -314,7 +314,7 @@ $(document).ready(function() {
     $('#addRow').click();
 
     // Setup - add a text input to each footer cell
-    $('#footer-search tfoot th').each(function() {
+    $('#footer-search tfoot th').each(function () {
         var title = $(this).text();
         $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
     });
@@ -323,10 +323,10 @@ $(document).ready(function() {
     var table = $('#footer-search').DataTable();
 
     // Apply the search
-    table.columns().every(function() {
+    table.columns().every(function () {
         var that = this;
 
-        $('input', this.footer()).on('keyup change', function() {
+        $('input', this.footer()).on('keyup change', function () {
             if (that.search() !== this.value) {
                 that
                     .search(this.value)
@@ -336,12 +336,12 @@ $(document).ready(function() {
     });
 
     $('#footer-select').DataTable({
-        initComplete: function() {
-            this.api().columns().every(function() {
+        initComplete: function () {
+            this.api().columns().every(function () {
                 var column = this;
                 var select = $('<select class="form-control form-control-sm"><option value=""></option></select>')
                     .appendTo($(column.footer()).empty())
-                    .on('change', function() {
+                    .on('change', function () {
                         var val = $.fn.dataTable.util.escapeRegex(
                             $(this).val()
                         );
@@ -351,7 +351,7 @@ $(document).ready(function() {
                             .draw();
                     });
 
-                column.data().unique().sort().each(function(d, j) {
+                column.data().unique().sort().each(function (d, j) {
                     select.append('<option value="' + d + '">' + d + '</option>')
                 });
             });
@@ -360,18 +360,18 @@ $(document).ready(function() {
     // Add Rows start
     var srow = $('#row-select').DataTable();
 
-    $('#row-select tbody').on('click', 'tr', function() {
+    $('#row-select tbody').on('click', 'tr', function () {
         $(this).toggleClass('selected');
     });
 
-    $('#row-select-btn').on('click',function() {
+    $('#row-select-btn').on('click', function () {
         alert(srow.rows('.selected').data().length + ' row(s) selected');
     });
     // Add Rows end
     // Delete rows start
     var drow = $('#row-delete').DataTable();
 
-    $('#row-delete tbody').on('click', 'tr', function() {
+    $('#row-delete tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
         } else {
@@ -380,7 +380,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#row-delete-btn').on('click',function() {
+    $('#row-delete-btn').on('click', function () {
         drow.row('.selected').remove().draw(!1);
     });
     // Delete rows end
@@ -407,15 +407,15 @@ $(document).ready(function() {
     var ct = $('#child-table').DataTable({
         "ajax": "dt-json-data/ajax-child-rows.json",
         "columns": [{
-                "className": 'details-control',
-                "orderable": false,
-                "data": null,
-                "defaultContent": ''
-            },
-            { "data": "name" },
-            { "data": "position" },
-            { "data": "office" },
-            { "data": "salary" }
+            "className": 'details-control',
+            "orderable": false,
+            "data": null,
+            "defaultContent": ''
+        },
+        { "data": "name" },
+        { "data": "position" },
+        { "data": "office" },
+        { "data": "salary" }
         ],
         "order": [
             [1, 'asc']
@@ -423,7 +423,7 @@ $(document).ready(function() {
     });
 
     // Add event listener for opening and closing details
-    $('#child-table tbody').on('click', 'td.details-control', function() {
+    $('#child-table tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = ct.row(tr);
 
@@ -441,7 +441,7 @@ $(document).ready(function() {
     // Form input start
     var table = $('#form-input-table').DataTable();
 
-    $('#form-input-btn').on('click',function() {
+    $('#form-input-btn').on('click', function () {
         var data = table.$('input, select').serialize();
         alert(
             "The following data would have been submitted to the server: \n\n" +
@@ -457,7 +457,7 @@ $(document).ready(function() {
         "paging": false
     });
 
-    $('a.toggle-vis').on('click', function(e) {
+    $('a.toggle-vis').on('click', function (e) {
         e.preventDefault();
 
         // Get the column API object
@@ -485,11 +485,11 @@ $(document).ready(function() {
     }
     $('#search-api').DataTable();
 
-    $('input.global_filter').on('keyup click', function() {
+    $('input.global_filter').on('keyup click', function () {
         filterGlobal();
     });
 
-    $('input.column_filter').on('keyup click', function() {
+    $('input.column_filter').on('keyup click', function () {
         filterColumn($(this).parents('tr').attr('data-column'));
     });
     // Search API end
@@ -555,23 +555,23 @@ $(document).ready(function() {
 
     var table = $('#dom-jqry').DataTable();
 
-    $('#dom-jqry tbody').on('click', 'tr', function() {
+    $('#dom-jqry tbody').on('click', 'tr', function () {
         var data = table.row(this).data();
-        $( table.table().container() ).removeClass( 'form-inline' );
+        $(table.table().container()).removeClass('form-inline');
         alert('You clicked on ' + data[0] + '\'s row');
     });
 
     $('#colum-rendr').DataTable({
         "columnDefs": [{
-                // The `data` parameter refers to the data for the cell (defined by the
-                // `data` option, which defaults to the column being worked with, in
-                // this case `data: 0`.
-                "render": function(data, type, row) {
-                    return data + ' (' + row[3] + ')';
-                },
-                "targets": 0
+            // The `data` parameter refers to the data for the cell (defined by the
+            // `data` option, which defaults to the column being worked with, in
+            // this case `data: 0`.
+            "render": function (data, type, row) {
+                return data + ' (' + row[3] + ')';
             },
-            { "visible": false, "targets": [3] }
+            "targets": 0
+        },
+        { "visible": false, "targets": [3] }
         ]
     });
 
@@ -607,12 +607,12 @@ $(document).ready(function() {
             [2, 'asc']
         ],
         "displayLength": 25,
-        "drawCallback": function(settings) {
+        "drawCallback": function (settings) {
             var api = this.api();
             var rows = api.rows({ page: 'current' }).nodes();
             var last = null;
 
-            api.column(2, { page: 'current' }).data().each(function(group, i) {
+            api.column(2, { page: 'current' }).data().each(function (group, i) {
                 if (last !== group) {
                     $(rows).eq(i).before(
                         '<tr class="group"><td colspan="5">' + group + '</td></tr>'
@@ -625,7 +625,7 @@ $(document).ready(function() {
     });
 
     // Order by the grouping
-    $('#row-grouping tbody').on('click', 'tr.group', function() {
+    $('#row-grouping tbody').on('click', 'tr.group', function () {
         var currentOrder = table.order()[0];
         if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
             table.order([2, 'desc']).draw();
@@ -636,23 +636,23 @@ $(document).ready(function() {
 
 
     $('#footer-callback').DataTable({
-        "footerCallback": function(row, data, start, end, display) {
+        "footerCallback": function (row, data, start, end, display) {
             var api = this.api(),
                 data;
 
             // Remove the formatting to get integer data for summation
-            var intVal = function(i) {
+            var intVal = function (i) {
                 return typeof i === 'string' ?
                     i.replace(/[\$,]/g, '') * 1 :
                     typeof i === 'number' ?
-                    i : 0;
+                        i : 0;
             };
 
             // Total over all pages
             total = api
                 .column(4)
                 .data()
-                .reduce(function(a, b) {
+                .reduce(function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0);
 
@@ -660,7 +660,7 @@ $(document).ready(function() {
             pageTotal = api
                 .column(4, { page: 'current' })
                 .data()
-                .reduce(function(a, b) {
+                .reduce(function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0);
 
@@ -679,7 +679,7 @@ $(document).ready(function() {
     $("div.toolbar").html('<b>Custom tool bar! Text/images etc.</b>');
 
     $('#row-callback').DataTable({
-        "createdRow": function(row, data, index) {
+        "createdRow": function (row, data, index) {
             if (data[5].replace(/[\$,]/g, '') * 1 > 150000) {
                 $('td', row).eq(5).addClass('highlight');
             }
