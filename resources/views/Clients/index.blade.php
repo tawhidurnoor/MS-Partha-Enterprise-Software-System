@@ -184,8 +184,20 @@
                 {{ method_field('PUT') }}
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Product Name</label>
-                        <input type="text" name="product_name" id="product_name" class="form-control" required>
+                        <label>Client's Name</label>
+                        <input type="text" name="client_name" id="client_name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Client's Company</label>
+                        <input type="text" name="client_company" id="client_company" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Client's Phone</label>
+                        <input type="text" name="client_phone" id="client_phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Client's Address</label>
+                        <input type="text" name="client_address" id="client_address" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -227,14 +239,17 @@
     function getEditDetails(id) {
         $.ajax({
             type: 'GET',
-            url: 'products/' + id,
+            url: 'clients/' + id,
             dataType: 'json',
             success: function(response) {
-                $('#product_name').val(response.product_name);
+                $('#client_name').val(response.client_name);
+                $('#client_company').val(response.client_company);
+                $('#client_phone').val(response.client_phone);
+                $('#client_address').val(response.client_address);
             }
         });
 
-        document.getElementById("edit_form").action = "products/" + id;
+        document.getElementById("edit_form").action = "clients/" + id;
     }
 </script>
 

@@ -69,7 +69,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        return $client;
     }
 
     /**
