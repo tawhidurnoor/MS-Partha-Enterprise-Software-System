@@ -181,6 +181,13 @@
                                 </li>
 
                                 <li class="">
+                                    <a href="{{route('clients.index')}}">
+                                        <span class="pcoded-micon"><i class="feather icon-users"></i></span>
+                                        <span class="pcoded-mtext">Clients</span>
+                                    </a>
+                                </li>
+
+                                <li class="">
                                     <a href="{{route('dashboard')}}">
                                         <span class="pcoded-micon"><i class="feather icon-shopping-cart"></i></span>
                                         <span class="pcoded-mtext">Sell Register</span>

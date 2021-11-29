@@ -14,7 +14,10 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::all();
+        return view('Clients.index', [
+            'clients' => $clients,
+        ]);
     }
 
     /**
@@ -35,7 +38,27 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client = new Client();
+        $client->client_name = $request->client_name;
+        $client->client_company = $request->client_company;
+        $client->client_phone = $request->client_phone;
+        $client->client_address = $request->client_address;
+
+        if ($client->save()) {
+
+            $notification = array(
+                'message' => 'Client Added Successfully.',
+                'alert-type' => 'alert-success'
+            );
+            return redirect()->back()->with($notification);
+        } else {
+
+            $notification = array(
+                'message' => 'Error Adding Client',
+                'alert-type' => 'alert-danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**
