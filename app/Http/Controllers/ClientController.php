@@ -92,7 +92,26 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $client->client_name = $request->client_name;
+        $client->client_company = $request->client_company;
+        $client->client_phone = $request->client_phone;
+        $client->client_address = $request->client_address;
+
+        if ($client->save()) {
+
+            $notification = array(
+                'message' => 'Client Updated Successfully.',
+                'alert-type' => 'alert-success'
+            );
+            return redirect()->back()->with($notification);
+        } else {
+
+            $notification = array(
+                'message' => 'Error Updating Client',
+                'alert-type' => 'alert-danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**
