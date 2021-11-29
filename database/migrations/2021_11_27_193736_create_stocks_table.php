@@ -21,7 +21,6 @@ class CreateStocksTable extends Migration
             $table->integer('previous_day_balance');
             $table->integer('receipts');
             $table->integer('sell');
-            $table->integer('balance');
             $table->timestamps();
         });
     }

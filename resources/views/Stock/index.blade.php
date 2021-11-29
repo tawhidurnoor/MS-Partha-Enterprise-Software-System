@@ -104,7 +104,7 @@
                                                         {{ $stock->sell }}
                                                     </td>
                                                     <td>
-                                                        {{ $stock->balance }}
+                                                        {{ $stock->previous_day_balance  +  $stock->receipts  - $stock->sell }}
                                                     </td>
                                                     <td>
                                                         <button type="button" class="btn btn-primary waves-effect edit_button" data-id="{{ $stock->id }}">Edit</button>

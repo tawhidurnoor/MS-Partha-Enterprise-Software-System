@@ -61,10 +61,22 @@ class StockController extends Controller
         $stock->date = $request->date;
         $stock->product_id = $request->product_id;
         //getting previous day
-        $previous_day_balance = Stock::where('date', '<', $request->date)
+        $previous_day_previous_day_balance = Stock::where('date', '<', $request->date)
             ->where('product_id', $request->product_id)
             ->orderBy('date', 'desc')
-            ->value('balance');
+            ->value('previous_day_balance');
+
+        $previous_day_receipts = Stock::where('date', '<', $request->date)
+            ->where('product_id', $request->product_id)
+            ->orderBy('date', 'desc')
+            ->value('receipts');
+
+        $previous_day_sell = Stock::where('date', '<', $request->date)
+            ->where('product_id', $request->product_id)
+            ->orderBy('date', 'desc')
+            ->value('sell');
+
+        $previous_day_balance = $previous_day_previous_day_balance + $previous_day_receipts - $previous_day_sell;
 
         $previous_day = Stock::where('date', '<', $request->date)
             ->where('product_id', $request->product_id)
@@ -130,21 +142,30 @@ class StockController extends Controller
      */
     public function update(Request $request, Stock $stock)
     {
-        //getting previous day balance
-        $next_day = Stock::where('previous_day', $stock->date)->get();
-
-        if ($next_day != '[]') {
-            //$next_day->balance = $next_day->balance - $next_day->previous_day_balance +  $stock->balance - $stock->receipts + $request->receipts;
-            //$next_day->previous_day_balance = $stock->balance - $stock->receipts + $request->receipts;
-            return $next_day;
+        if ($stock->receipts < $request->receipts) {
+            Stock::where('product_id', $stock->product_id)
+                ->whereDate('date', '>', $stock->date)
+                ->increment('previous_day_balance', $request->receipts - $stock->receipts);
         } else {
-            return 'null';
+            Stock::where('product_id', $stock->product_id)
+                ->whereDate('date', '>', $stock->date)
+                ->decrement('previous_day_balance', $stock->receipts - $request->receipts);
         }
 
-        $stock->balance = $stock->balance - $stock->receipts + $request->receipts;
         $stock->receipts = $request->receipts;
 
-        if ($stock->save() && $next_day->save()) {
+        /*
+        //updating previous day
+        $next_day = Stock::where('previous_day', $stock->date)->first();
+
+        if ($next_day != '[]' || $next_day != null) {
+            $next_day->balance = $next_day->balance - $next_day->previous_day_balance +  $updated_balance;
+            $next_day->previous_day_balance = $updated_balance;
+            $next_day->save();
+        }
+        */
+
+        if ($stock->save()) {
 
             $notification = array(
                 'message' => 'Stock Register Updated Successfully.',
