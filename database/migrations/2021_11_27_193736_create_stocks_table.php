@@ -17,6 +17,8 @@ class CreateStocksTable extends Migration
             $table->id();
             $table->date('date');
             $table->string('product_id');
+            $table->date('previous_day');
+            $table->integer('previous_day_balance');
             $table->integer('receipts');
             $table->integer('sell');
             $table->integer('balance');

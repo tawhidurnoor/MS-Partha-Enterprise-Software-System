@@ -66,9 +66,21 @@ class StockController extends Controller
             ->orderBy('date', 'desc')
             ->value('balance');
 
-        $stock->receipts = $request->receipts + $previous_day_balance;
+        $previous_day = Stock::where('date', '<', $request->date)
+            ->where('product_id', $request->product_id)
+            ->orderBy('date', 'desc')
+            ->value('date');
+
+        if ($previous_day_balance == null) {
+            $previous_day_balance = 0;
+            $previous_day = date('1111-11-11');
+        }
+
+        $stock->previous_day_balance = $previous_day_balance;
+        $stock->previous_day = $previous_day;
+        $stock->receipts = $request->receipts;
         $stock->sell = 0;
-        $stock->balance = $stock->receipts; //as no sell is Registered for this record
+        $stock->balance = $request->receipts + $previous_day_balance; //as no sell is Registered for this record
 
         if ($stock->save()) {
 
@@ -118,7 +130,35 @@ class StockController extends Controller
      */
     public function update(Request $request, Stock $stock)
     {
-        //
+        //getting previous day balance
+        $next_day = Stock::where('previous_day', $stock->date)->get();
+
+        if ($next_day != '[]') {
+            //$next_day->balance = $next_day->balance - $next_day->previous_day_balance +  $stock->balance - $stock->receipts + $request->receipts;
+            //$next_day->previous_day_balance = $stock->balance - $stock->receipts + $request->receipts;
+            return $next_day;
+        } else {
+            return 'null';
+        }
+
+        $stock->balance = $stock->balance - $stock->receipts + $request->receipts;
+        $stock->receipts = $request->receipts;
+
+        if ($stock->save() && $next_day->save()) {
+
+            $notification = array(
+                'message' => 'Stock Register Updated Successfully.',
+                'alert-type' => 'alert-success'
+            );
+            return redirect()->back()->with($notification);
+        } else {
+
+            $notification = array(
+                'message' => 'Error Updating Stock Register',
+                'alert-type' => 'alert-danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**

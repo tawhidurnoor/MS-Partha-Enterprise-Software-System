@@ -75,6 +75,7 @@
                                                 <tr>
                                                     <th>Date</th>
                                                     <th>Product</th>
+                                                    <th>Previous Day Balance</th>
                                                     <th>Receipts</th>
                                                     <th>Sell</th>
                                                     <th>Balance</th>
@@ -90,6 +91,11 @@
                                                     </td>
                                                     <td>
                                                         {{ $stock->product_name }}
+                                                    </td>
+
+                                                    <td>
+                                                        {{ $stock->previous_day_balance }}
+                                                        <label class="badge badge-inverse-success">{!! htmlspecialchars_decode(date('j-m-Y', strtotime($stock->previous_day))) !!}</label>
                                                     </td>
                                                     <td>
                                                         {{ $stock->receipts }}
@@ -110,6 +116,7 @@
                                                 <tr>
                                                     <th>Date</th>
                                                     <th>Product</th>
+                                                    <th>Previous Day Balance</th>
                                                     <th>Receipts</th>
                                                     <th>Sell</th>
                                                     <th>Balance</th>
@@ -195,11 +202,11 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Date</label>
-                        <input type="date" name="date" id="date" class="form-control" required>
+                        <input type="date" name="date" id="date" class="form-control" required disabled>
                     </div>
                     <div class="form-group">
                         <label>Product</label>
-                        <select name="product_id" id="product_id" class="form-control" required>
+                        <select name="product_id" id="product_id" class="form-control" required disabled>
                             <option value="">Select a product </option>
                             @foreach($products as $product)
                             <option value="{{$product->id}}">
