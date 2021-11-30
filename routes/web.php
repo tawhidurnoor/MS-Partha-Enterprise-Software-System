@@ -24,3 +24,5 @@ Route::resource('/products', 'ProductController');
 Route::resource('/stocks', 'StockController');
 
 Route::resource('/clients', 'ClientController');
+
+Route::resource('/sell', 'SellController');
