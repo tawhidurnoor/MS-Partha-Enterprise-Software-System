@@ -84,7 +84,11 @@ class SellController extends Controller
      */
     public function edit(Sell $sell)
     {
+        $client = Client::findOrFail($sell->client_id);
+        $clients =  Client::all();
         return view('Sell.edit', [
+            'client' => $client,
+            'clients' => $clients,
             'sell' => $sell,
         ]);
     }
@@ -98,7 +102,23 @@ class SellController extends Controller
      */
     public function update(Request $request, Sell $sell)
     {
-        //
+        $sell->client_id = $request->client_id;
+
+        if ($sell->save()) {
+
+            $notification = array(
+                'message' => 'Sell Register Updated Successfully.',
+                'alert-type' => 'alert-success'
+            );
+            return redirect()->back()->with($notification);
+        } else {
+
+            $notification = array(
+                'message' => 'Error Updating Sell Register',
+                'alert-type' => 'alert-danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**
