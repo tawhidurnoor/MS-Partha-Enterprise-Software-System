@@ -173,6 +173,9 @@
                                                 {{ $selldetail->total_unit }}
                                             </td>
                                             <td>
+                                                {{ $selldetail->total_unit*$selldetail->unit_price }}
+                                            </td>
+                                            <td>
                                                 <a class="btn btn-primary waves-effect" href="">Edit</a>
                                             </td>
                                         </tr>
