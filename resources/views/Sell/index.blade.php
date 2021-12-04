@@ -73,7 +73,7 @@
                                         <table id="datatable" class="table table-striped table-bordered nowrap">
                                             <thead>
                                                 <tr>
-                                                    <th>client_id</th>
+                                                    <th>Client</th>
                                                     <th>Total</th>
                                                     <th>Received</th>
                                                     <th>Due</th>

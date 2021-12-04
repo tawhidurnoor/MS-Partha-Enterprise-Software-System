@@ -120,9 +120,77 @@
                     </div>
 
 
+                    <div class="card">
+                        <div class="card-header">
 
-                    <div class="row">
 
+                            <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#add_modal">Add</button>
+                            <br><br>
+                            @if (Session::has('message'))
+                            <div class="alert {{Session::get('alert-type')}} icons-alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <i class="icofont icofont-close-line-circled"></i>
+                                </button>
+                                <p>
+                                    {{ Session::get('message') }}
+                                </p>
+                            </div>
+                            @endif
+
+
+                        </div>
+
+
+                        <div class="card-block">
+                            <div class="dt-responsive table-responsive">
+
+                                <table id="datatable" class="table table-striped table-bordered nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Product</th>
+                                            <th>Unit Price</th>
+                                            <th>Total Unit</th>
+                                            <th>Total</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach ($selldetails as $selldetail)
+                                        <tr>
+                                            <td>
+                                                {{ $selldetail->date }}
+                                            </td>
+                                            <td>
+                                                {{ $selldetail->product_id }}
+                                            </td>
+                                            <td>
+                                                {{ $selldetail->unit_price }}
+                                            </td>
+                                            <td>
+                                                {{ $selldetail->total_unit }}
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-primary waves-effect" href="">Edit</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Product</th>
+                                            <th>Unit Price</th>
+                                            <th>Total Unit</th>
+                                            <th>Total</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+                        </div>
                     </div>
 
 
@@ -175,6 +243,61 @@
 </div>
 
 
+
+<!-- Add Modal -->
+<div class="modal fade" id="add_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Register a Sell</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('sell.store') }}" method="post">
+                @csrf
+                <div class="modal-body">
+
+                    <input type="hidden" name="sell_id" value="{{$sell->id}}">
+
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" name="date" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Product</label>
+                        <select name="product_id" class="form-control" required>
+                            <option value="">Select a product </option>
+                            @foreach($products as $product)
+                            <option value="{{$product->id}}">
+                                {{$product->product_name}}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit Price</label>
+                        <input type="number" name="unit_price" class="form-control" step="any" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Total Unit</label>
+                        <input type="number" name="total_unit" class="form-control" required>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light ">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 
@@ -189,6 +312,16 @@
             var id = $(this).data('id');
         });
 
+    });
+</script>
+
+<script>
+    $('#datatable').DataTable({
+        "paging": true,
+        "ordering": false,
+        "bLengthChange": true,
+        "info": true,
+        "searching": true
     });
 </script>
 

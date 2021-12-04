@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Product;
 use App\Sell;
+use App\Selldetail;
 use Illuminate\Http\Request;
 
 class SellController extends Controller
@@ -86,10 +88,14 @@ class SellController extends Controller
     {
         $client = Client::findOrFail($sell->client_id);
         $clients =  Client::all();
+        $selldetails = Selldetail::where('sell_id', $sell->id)->get();
+        $products = Product::all();
         return view('Sell.edit', [
             'client' => $client,
             'clients' => $clients,
             'sell' => $sell,
+            'selldetails' => $selldetails,
+            'products' => $products,
         ]);
     }
 
