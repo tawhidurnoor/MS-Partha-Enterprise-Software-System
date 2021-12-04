@@ -164,7 +164,7 @@
                                                 {{ $selldetail->date }}
                                             </td>
                                             <td>
-                                                {{ $selldetail->product_id }}
+                                                {{ $selldetail->product_name }}
                                             </td>
                                             <td>
                                                 {{ $selldetail->unit_price }}

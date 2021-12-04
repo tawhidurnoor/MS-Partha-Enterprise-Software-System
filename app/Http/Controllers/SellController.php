@@ -88,7 +88,10 @@ class SellController extends Controller
     {
         $client = Client::findOrFail($sell->client_id);
         $clients =  Client::all();
-        $selldetails = Selldetail::where('sell_id', $sell->id)->get();
+        $selldetails = Selldetail::where('sell_id', $sell->id)
+            ->join('products', 'selldetails.product_id', 'products.id')
+            ->selectRaw('selldetails.*, products.product_name as product_name')
+            ->get();
         $products = Product::all();
         return view('Sell.edit', [
             'client' => $client,
