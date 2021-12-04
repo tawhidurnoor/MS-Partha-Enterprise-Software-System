@@ -26,3 +26,5 @@ Route::resource('/stocks', 'StockController');
 Route::resource('/clients', 'ClientController');
 
 Route::resource('/sell', 'SellController');
+
+Route::post('/selldetails/store', 'SelldetailsController@store')->name('selldetails.store');

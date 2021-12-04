@@ -126,7 +126,8 @@
 
                             <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#add_modal">Add</button>
                             <br><br>
-                            @if (Session::has('message'))
+
+                            <!-- @if (Session::has('message'))
                             <div class="alert {{Session::get('alert-type')}} icons-alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <i class="icofont icofont-close-line-circled"></i>
@@ -135,7 +136,7 @@
                                     {{ Session::get('message') }}
                                 </p>
                             </div>
-                            @endif
+                            @endif -->
 
 
                         </div>
@@ -254,7 +255,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('sell.store') }}" method="post">
+            <form action="{{ route('selldetails.store') }}" method="post">
                 @csrf
                 <div class="modal-body">
 

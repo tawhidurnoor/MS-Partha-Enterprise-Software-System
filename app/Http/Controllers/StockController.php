@@ -92,7 +92,7 @@ class StockController extends Controller
         $stock->previous_day = $previous_day;
         $stock->receipts = $request->receipts;
         $stock->sell = 0;
-        $stock->balance = $request->receipts + $previous_day_balance; //as no sell is Registered for this record
+        //$stock->balance = $request->receipts + $previous_day_balance; //as no sell is Registered for this record
 
         if ($stock->save()) {
 
