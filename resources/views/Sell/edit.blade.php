@@ -297,20 +297,18 @@
                             </div>
                         </div>
 
-
                         <div class="col">
-                            <div class="form-radio m-b-30">
-                                <div class="radio radiofill radio-success radio-inline">
-                                    <label>
-                                        <input type="radio" name="is_chceked[]" value="1" checked="checked">
-                                        <i class="helper"></i>Yes
-                                    </label>
-                                </div>
-                                <div class="radio radiofill radio-danger radio-inline">
-                                    <label>
-                                        <input type="radio" name="is_chceked[]" value="0">
-                                        <i class="helper"></i>No
-                                    </label>
+                            <div class="form-group">
+                                <label>Add This</label>
+                                <div class="border-checkbox-section">
+                                    <div class="border-checkbox-group border-checkbox-group-success">
+                                        <input name="is_chceked[]" class="border-checkbox" type="checkbox" value="yes" id="checkbox{{$product->id}}" onclick='document.getElementById("checkbox+{{$product->id}}").checked = false;' checked>
+                                        <label class="border-checkbox-label" for="checkbox{{$product->id}}">Yes</label>
+                                    </div>
+                                    <div class="border-checkbox-group border-checkbox-group-danger">
+                                        <input name="is_chceked[]" class="border-checkbox" type="checkbox" value="no" id="checkbox+{{$product->id}}" onclick='document.getElementById("checkbox{{$product->id}}").checked = false;'>
+                                        <label class="border-checkbox-label" for="checkbox+{{$product->id}}">No</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
