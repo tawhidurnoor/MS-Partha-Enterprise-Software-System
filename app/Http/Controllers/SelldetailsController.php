@@ -10,6 +10,7 @@ class SelldetailsController extends Controller
 {
     public function store(Request $request)
     {
+        return $request;
         //stock checking
         $stock_counter = Stock::where('date', $request->date)
             ->where('product_id', $request->product_id)

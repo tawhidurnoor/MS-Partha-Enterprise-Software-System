@@ -250,7 +250,7 @@
 
 <!-- Add Modal -->
 <div class="modal fade" id="add_modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Register a Sell</h4>
@@ -262,34 +262,62 @@
                 @csrf
                 <div class="modal-body">
 
-                    <input type="hidden" name="sell_id" value="{{$sell->id}}">
+                    @foreach($products as $product)
 
-                    <div class="form-group">
-                        <label>Date</label>
-                        <input type="date" name="date" class="form-control" required>
+                    <div class="row">
+
+                        <input type="hidden" name="sell_id[]" value="{{$sell->id}}">
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="date" name="date[]" value="@php echo(date('Y-m-d')) @endphp" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Product</label>
+                                <input type="hidden" name="product_id[]" value="{{$product->id}}" class="form-control" required>
+                                <input type="text" class="form-control" value="{{$product->product_name}}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Unit Price</label>
+                                <input type="number" name="unit_price[]" class="form-control" step="any" value="0" required>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Total Unit</label>
+                                <input type="number" name="total_unit[]" class="form-control" value="0" required>
+                            </div>
+                        </div>
+
+
+                        <div class="col">
+                            <div class="form-radio m-b-30">
+                                <div class="radio radiofill radio-success radio-inline">
+                                    <label>
+                                        <input type="radio" name="is_chceked[]" value="1" checked="checked">
+                                        <i class="helper"></i>Yes
+                                    </label>
+                                </div>
+                                <div class="radio radiofill radio-danger radio-inline">
+                                    <label>
+                                        <input type="radio" name="is_chceked[]" value="0">
+                                        <i class="helper"></i>No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="form-group">
-                        <label>Product</label>
-                        <select name="product_id" class="form-control" required>
-                            <option value="">Select a product </option>
-                            @foreach($products as $product)
-                            <option value="{{$product->id}}">
-                                {{$product->product_name}}
-                            </option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Unit Price</label>
-                        <input type="number" name="unit_price" class="form-control" step="any" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Total Unit</label>
-                        <input type="number" name="total_unit" class="form-control" required>
-                    </div>
+                    @endforeach
 
                 </div>
 
