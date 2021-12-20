@@ -51,6 +51,16 @@ class SelldetailsController extends Controller
                     continue;
                 }
 
+
+                $counting_duplicate_sell = Selldetail::where('sell_id', $sell_id[$i])
+                    ->where('product_id',  $product_id[$i])
+                    ->count();
+
+                if ($counting_duplicate_sell > 0) {
+                    $message .= 'Product is already in sell register. ';
+                    continue;
+                }
+
                 //sell registering
                 //$sell = new Selldetail();
                 $dataSave = [
