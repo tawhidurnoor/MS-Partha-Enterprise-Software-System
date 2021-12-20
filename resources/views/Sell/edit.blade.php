@@ -349,13 +349,6 @@
 
                         <div class="col">
                             <div class="form-group">
-                                <label>Date</label>
-                                <input type="date" name="date" id="date" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <div class="form-group">
                                 <label>Unit Price</label>
                                 <input type="number" name="unit_price" id="unit_price" class="form-control" step="any" value="0" required>
                             </div>
@@ -414,7 +407,6 @@
             url: '../../selldetails/' + id,
             dataType: 'json',
             success: function(response) {
-                $('#date').val(response.date);
                 $('#unit_price').val(response.unit_price);
                 $('#total_unit').val(response.total_unit);
             }

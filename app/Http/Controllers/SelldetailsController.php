@@ -120,6 +120,29 @@ class SelldetailsController extends Controller
 
     public function update(Request $request, Selldetail $selldetail)
     {
-        return $selldetail;
+        //updating sell
+        $sell = Sell::findOrFail($selldetail->sell_id);
+        $sell->total = $sell->total - ($selldetail->unit_price * $selldetail->total_unit) + ($request->unit_price * $request->total_unit);
+
+        //updating stock
+        $stock_sell_ammount = Stock::where('date', $selldetail->date)
+            ->where('product_id', $selldetail->product_id)
+            ->value('sell');
+        $new_sell_ammount = $stock_sell_ammount - $selldetail->total_unit + $request->total_unit;
+        Stock::where('date', $selldetail->date)
+            ->where('product_id', $selldetail->product_id)
+            ->update(['sell' => $new_sell_ammount]);
+
+        $selldetail->unit_price = $request->unit_price;
+        $selldetail->total_unit = $request->total_unit;
+
+        $sell->save();
+        $selldetail->save();
+
+        $notification = array(
+            'message' => 'Sell Register Updated Successfully.',
+            'alert-type' => 'alert-success'
+        );
+        return redirect()->back()->with($notification);
     }
 }
