@@ -176,7 +176,7 @@
                                                 {{ $selldetail->total_unit*$selldetail->unit_price }}
                                             </td>
                                             <td>
-                                                <a class="btn btn-primary waves-effect" href="">Edit</a>
+                                                <button class="btn btn-primary waves-effect edit_button_details" data-id="{{$selldetail->id}}">Edit</button>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -221,7 +221,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{route('sell.update', $sell->id)}}" id="edit_form" method="post">
+            <form action="{{route('sell.update', $sell->id)}}" method="post">
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
                 <div class="modal-body">
@@ -328,6 +328,60 @@
     </div>
 </div>
 
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="edit_modal_details" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Sell</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="" id="edit_form" method="post">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+
+                    <div class="row">
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="date" name="date" id="date" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Unit Price</label>
+                                <input type="number" name="unit_price" id="unit_price" class="form-control" step="any" value="0" required>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Total Unit</label>
+                                <input type="number" name="total_unit" id="total_unit" class="form-control" value="0" required>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light ">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 
@@ -343,6 +397,31 @@
         });
 
     });
+
+    $(function() {
+        $(document).on('click', '.edit_button_details', function(e) {
+            e.preventDefault();
+            $('#edit_modal_details').modal('show');
+            var id = $(this).data('id');
+            getEditDetails(id);
+        });
+
+    });
+
+    function getEditDetails(id) {
+        $.ajax({
+            type: 'GET',
+            url: '../../selldetails/' + id,
+            dataType: 'json',
+            success: function(response) {
+                $('#date').val(response.date);
+                $('#unit_price').val(response.unit_price);
+                $('#total_unit').val(response.total_unit);
+            }
+        });
+
+        document.getElementById("edit_form").action = "../../selldetails/" + id;
+    }
 </script>
 
 <script>

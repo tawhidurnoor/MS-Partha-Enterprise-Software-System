@@ -28,3 +28,7 @@ Route::resource('/clients', 'ClientController');
 Route::resource('/sell', 'SellController');
 
 Route::post('/selldetails/store', 'SelldetailsController@store')->name('selldetails.store');
+
+Route::get('/selldetails/{selldetail}', 'SelldetailsController@show')->name('selldetails.show');
+
+Route::put('/selldetails/{selldetail}', 'SelldetailsController@update')->name('selldetails.update');

@@ -112,4 +112,14 @@ class SelldetailsController extends Controller
             return redirect()->back()->with($notification);
         }
     }
+
+    public function show(Selldetail $selldetail)
+    {
+        return $selldetail;
+    }
+
+    public function update(Request $request, Selldetail $selldetail)
+    {
+        return $selldetail;
+    }
 }
