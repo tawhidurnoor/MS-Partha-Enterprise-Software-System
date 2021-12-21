@@ -32,3 +32,7 @@ Route::post('/selldetails/store', 'SelldetailsController@store')->name('selldeta
 Route::get('/selldetails/{selldetail}', 'SelldetailsController@show')->name('selldetails.show');
 
 Route::put('/selldetails/{selldetail}', 'SelldetailsController@update')->name('selldetails.update');
+
+Route::get('/sell/payment/{sell}', 'PaymentController@sellIndex');
+
+Route::resource('/sell/payment', 'PaymentController');

@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Payment;
+use App\Sell;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+    public function sellIndex(Sell $sell)
+    {
+        return $sell;
+    }
     /**
      * Display a listing of the resource.
      *
