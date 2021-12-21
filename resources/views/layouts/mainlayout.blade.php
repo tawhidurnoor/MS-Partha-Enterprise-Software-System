@@ -159,35 +159,35 @@
                             <div class="pcoded-navigatio-lavel">Navigation</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                                <li class="">
+                                <li class="{{ request()->is('dashboard*') ? 'active' : '' }}">
                                     <a href="{{route('dashboard')}}">
                                         <span class="pcoded-micon"><i class="feather icon-home"></i></span>
                                         <span class="pcoded-mtext">Dashboard</span>
                                     </a>
                                 </li>
 
-                                <li class="">
+                                <li class="{{ request()->is('products*') ? 'active' : '' }}">
                                     <a href="{{route('products.index')}}">
                                         <span class="pcoded-micon"><i class="feather icon-box"></i></span>
                                         <span class="pcoded-mtext">Products</span>
                                     </a>
                                 </li>
 
-                                <li class="">
+                                <li class="{{ request()->is('stocks*') ? 'active' : '' }}">
                                     <a href="{{route('stocks.index')}}">
                                         <span class="pcoded-micon"><i class="feather icon-box"></i></span>
                                         <span class="pcoded-mtext">Stock Register</span>
                                     </a>
                                 </li>
 
-                                <li class="">
+                                <li class="{{ request()->is('clients*') ? 'active' : '' }}">
                                     <a href="{{route('clients.index')}}">
                                         <span class="pcoded-micon"><i class="feather icon-users"></i></span>
                                         <span class="pcoded-mtext">Clients</span>
                                     </a>
                                 </li>
 
-                                <li class="">
+                                <li class="{{ request()->is('sell*') ? 'active' : '' }}">
                                     <a href="{{route('sell.index')}}">
                                         <span class="pcoded-micon"><i class="feather icon-shopping-cart"></i></span>
                                         <span class="pcoded-mtext">Sell Register</span>
