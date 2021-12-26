@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,3 +37,7 @@ Route::put('/selldetails/{selldetail}', 'SelldetailsController@update')->name('s
 Route::get('/sell/payment/{sell}', 'PaymentController@sellIndex');
 
 Route::resource('/sell/payment', 'PaymentController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
