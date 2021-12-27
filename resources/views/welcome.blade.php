@@ -93,27 +93,13 @@
                                         </h3>
                                     </div>
                                 </div>
-                                <div class="form-group form-primary">
-                                    <input type="text" name="email" class="form-control" required="" placeholder="Your Email Address">
-                                    <span class="form-bar"></span>
-                                </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20"><i class="icofont icofont-lock"></i> Lock Screen </button>
+                                        <a href="{{route('dashboard')}}" style="color:white" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20"><i class="icofont icofont-lock"></i> Dashboard </a>
                                     </div>
                                 </div>
-                                <p class="text-inverse text-right">Back to <a href="auth-normal-sign-in.html">Login</a>
+                                <p class="text-inverse text-right">Back to <a href="/login">Login</a>
                                 </p>
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <p class="text-inverse text-left m-b-0">Thank you.</p>
-                                        <p class="text-inverse text-left"><a href="/dashboard"><b class="f-w-600">Back
-                                                    to website</b></a></p>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <img src="/files/assets/images/auth/Logo-small-bottom.png" alt="small-logo.png">
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </form>

@@ -112,29 +112,13 @@
                             <li class="user-profile header-notification">
                                 <div class="dropdown-primary dropdown">
                                     <div class="dropdown-toggle" data-toggle="dropdown">
-                                        <img src="https://scontent.fdac23-1.fna.fbcdn.net/v/t1.6435-1/c140.431.801.801a/s160x160/73504712_1329469617221549_6402717243766996992_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=7206a8&_nc_eui2=AeFZiZpt3nj5bPSiTLdrHo8HrBTQn1JX4jesFNCfUlfiN-xDPfG39kzV4Y_WiG2AgYewUPAhRIwaQ1qESDNwv-Ga&_nc_ohc=SkUYZy9WsgwAX902fsm&_nc_oc=AQn4Q3Vjj1jbe8o_Ijb26X1gQl4S-3IYsUBLNdB5EU_4oD8AczaFtGzhre69GDfNy1c&_nc_ht=scontent.fdac23-1.fna&oh=11ab5750f1e092a96d08cd06614fc713&oe=61BC5ACA" class="img-radius" alt="User-Profile-Image">
                                         <span>Partha Ghose</span>
                                         <i class="feather icon-chevron-down"></i>
                                     </div>
                                     <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                                         <li>
-                                            <a href="#!">
-                                                <i class="feather icon-settings"></i> Settings
-                                            </a>
-                                        </li>
-                                        <li>
                                             <a href="user-profile.html">
                                                 <i class="feather icon-user"></i> Profile
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="email-inbox.html">
-                                                <i class="feather icon-mail"></i> My Messages
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="auth-lock-screen.html">
-                                                <i class="feather icon-lock"></i> Lock Screen
                                             </a>
                                         </li>
                                         <li>
